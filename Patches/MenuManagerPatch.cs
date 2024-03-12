@@ -37,12 +37,7 @@ internal class MenuManagerPatch {
     }
 
     private static IEnumerator PatchMenuDelayed() {
-        /* 
-        *  Waits a single frame.
-        *
-        *  This is slightly hacky but ensures all references are not null
-        *  and that the mod makes its changes after all others.
-        */  
+        // Essentially waits until the menu is fully loaded.
         yield return new WaitUntil(() => !GameNetworkManager.Instance.firstTimeInMenu);
 
         MenuContainer = GameObject.Find("MenuContainer")?.transform;

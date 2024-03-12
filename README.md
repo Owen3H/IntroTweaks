@@ -1,6 +1,3 @@
-> [!WARNING]
-> **NO LONGER MAINTAINED**
-
 <img align="right" width="150" height="150" src="https://gcdn.thunderstore.io/live/repository/icons/Owen3H-IntroTweaks-1.2.2.png.128x128_q95.jpg">
 
 # IntroTweaks
@@ -23,3 +20,6 @@ A configurable, quality of life mod for Lethal Company intro/menu screens.
 ## Compatibility Notes
 - This mod hides the original version text UI element, other mods should not be editing it directly - please take that up with them.
 - Unless disabled, IntroTweaks will align the menu buttons. If you have other mods installed that implement their own buttons/logic, please create a new issue with the `Compatibility` tag.
+
+## Contact
+Feel free to join my [discord](https://discord.gg/CMyTmUMP2P) if you want to reach me.

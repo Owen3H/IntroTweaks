@@ -17,12 +17,14 @@ internal class StartMatchLeverPatch {
 	}
 
     static IEnumerator PullLeverAnim(StartMatchLever instance) {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(Plugin.Config.AUTO_START_GAME_DELAY.Value);
 
-        instance.leverAnimatorObject.SetBool("pullLever", true);
-        instance.leverHasBeenPulled = true;
-        instance.triggerScript.interactable = false;
+        if (!instance.leverHasBeenPulled) {
+            instance.leverAnimatorObject.SetBool("pullLever", true);
+            instance.leverHasBeenPulled = true;
+            instance.triggerScript.interactable = false;
 
-        instance.PullLever();
+            instance.PullLever();
+        }
     }
 }

@@ -39,6 +39,7 @@ public class Config {
 
     #region Misc
     public ConfigEntry<bool> AUTO_START_GAME { get; private set; }
+    public ConfigEntry<float> AUTO_START_GAME_DELAY { get; private set; }
     public ConfigEntry<bool> DISABLE_FIRST_DAY_SFX { get; private set; }
     public ConfigEntry<int> GAME_STARTUP_DISPLAY { get; private set; }
     #endregion
@@ -148,6 +149,11 @@ public class Config {
         #region Misc options
         AUTO_START_GAME = NewEntry(Category.MISC, "bAutoStartGame", false, 
             "If enabled, the lever will be pulled automatically to begin the landing sequence."
+        );
+
+        AUTO_START_GAME_DELAY = NewEntry(Category.MISC, "fAutoStartGameDelay", 1.5f, 
+            "The delay before the lever is automatically pulled when bAutoStartGame is true.\n" +
+            "Minimum: 1 | Maximum: 30"
         );
 
         DISABLE_FIRST_DAY_SFX = NewEntry(Category.MISC, "bDisableFirstDaySFX", false,

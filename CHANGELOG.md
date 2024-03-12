@@ -1,6 +1,15 @@
 # Changelog History
 This list is reads from bottom to top, with latest versions first.
 
+## v1.5.0
+Hi :)\
+
+- Added `fAutoStartGameDelay` for configuring the delay before the lever is automatically pulled.
+- Addressed compatibility with LLL by skipping boot animation less invasively.
+- InitScene is now always loaded asynchronously regardless of having LLL.
+- Removed "LLL detected" log warning.
+- Removed redundent `Metadata` file.
+ 
 ## v1.4.6
 - Implemented new config option `bAutoStartGame` which will automatically pull the lever. You can find this in the **Miscellaneous** section.
 - Addressed occasional (but harmless) errors being logged by editing the menu elements too early.

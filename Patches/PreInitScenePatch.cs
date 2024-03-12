@@ -32,20 +32,7 @@ internal class PreInitScenePatch {
         bool online = Plugin.SelectedMode == "online";
         string sceneToLoad = online ? "InitScene" : "InitSceneLANMode";
 
-        if (Plugin.ModInstalled("LethalLevelLoader")) {
-            Plugin.Logger.LogWarning(
-                "\n===========================================================================================\n" +
-                $"LethalLevelLoader was found.\nSkipping to {mode.ToUpper()} is delayed until all bundles have loaded.\n\n" +
-                "This is temporary fix specfically for LLL, consider setting `bAutoSelectMode` to OFF instead!\n" +
-                "Ideally, LLL should address this by loading in Awake or using DontDestroyOnLoad.\n" +
-                "============================================================================================="
-            );
-
-            SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
-            return;
-        }
-
-        SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
         #endregion
     }
 }

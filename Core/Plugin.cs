@@ -7,19 +7,22 @@ using HarmonyLib;
 using static UnityEngine.Rendering.SplashScreen;
 using UnityEngine.SceneManagement;
 
-using IntroTweaks.Core;
 using BepInEx.Bootstrap;
 using System.Linq;
 using IntroTweaks.Data;
 
 namespace IntroTweaks;
 
-[BepInPlugin(Metadata.GUID, Metadata.NAME, Metadata.VERSION)]
+[BepInPlugin(GUID, NAME, VERSION)]
 public class Plugin : BaseUnityPlugin {
     internal static new ManualLogSource Logger { get; private set; }
     public static new Config Config { get; private set; }
 
     internal static string SelectedMode;
+
+    const string GUID = MyPluginInfo.PLUGIN_GUID;
+    const string NAME = MyPluginInfo.PLUGIN_NAME;
+    const string VERSION = MyPluginInfo.PLUGIN_VERSION;
 
     private Harmony patcher;
 
@@ -51,7 +54,7 @@ public class Plugin : BaseUnityPlugin {
         SelectedMode = Config.AUTO_SELECT_MODE.Value.ToLower();
 
         try {
-            patcher = new(Metadata.GUID);
+            patcher = new(GUID);
             patcher.PatchAll();
 
             Logger.LogInfo("Plugin loaded.");
