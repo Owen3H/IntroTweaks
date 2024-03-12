@@ -2,7 +2,7 @@
 This list is reads from bottom to top, with latest versions first.
 
 ## v1.5.0
-Hi :)\
+Hi :)
 
 - Added `fAutoStartGameDelay` for configuring the delay before the lever is automatically pulled.
 - Addressed compatibility with LLL by skipping boot animation less invasively.
