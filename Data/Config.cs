@@ -89,7 +89,7 @@ public class Config {
             "May cause overlapping issues, only enable it if you don't use other mods that edit the menu."
         );
 
-        FIX_MENU_PANELS = NewEntry(Category.MENU_TWEAKS, "bFixMenuPanels", false,
+        FIX_MENU_PANELS = NewEntry(Category.MENU_TWEAKS, "bFixMenuPanels", true,
             "The main menu panels (host, servers, loading screen) all have anchoring, offset and sizing issues.\n" +
             "This option helps solve them and improve the look of the menu.\n\nMAY BREAK SOME MODS."
         );

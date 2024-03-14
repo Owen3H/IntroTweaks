@@ -1,21 +1,19 @@
 # Changelog History
 This list is reads from bottom to top, with latest versions first.
 
-## v1.5.0
-Hi :)
+## v1.
+- 
 
+## v1.5.0
 - Added `fAutoStartGameDelay` for configuring the delay before the lever is automatically pulled.
-- Addressed compatibility with LLL by skipping boot animation less invasively.
-- InitScene is now always loaded asynchronously regardless of having LLL.
-- Removed "LLL detected" log warning.
+- Skipping boot animation is now done less invasively.
+- InitScene is now always loaded asynchronously.
 - Removed redundent `Metadata` file.
  
 ## v1.4.6
 - Implemented new config option `bAutoStartGame` which will automatically pull the lever. You can find this in the **Miscellaneous** section.
 - Addressed occasional (but harmless) errors being logged by editing the menu elements too early.
 - Defaulted `bAutoSelectMode` to `OFF` so it's opt-in rather than opt-out.
-- Improved compatibility with **LethalLevelLoader** by loading the scene asynchronously if found.
-    > This is the shittiest "solution" and should be addressed further by LLL.
 
 ## v1.4.5
 - Fixed issue where `bAutoSelectHost` would cause a black screen to be shown, softlocking the menu.

@@ -133,18 +133,20 @@ internal class MenuManagerPatch {
     [HarmonyPostfix]
     [HarmonyPatch("Update")]
     static void UpdatePatch(MenuManager __instance) {
+        // Create the new game version text if not made already.
+        if (versionText == null) {
+            TryReplaceVersionText();
+            return;
+        }
+
+        // Make sure the text is correct.
+        versionText.text = Cfg.VERSION_TEXT.Value.Replace("$VERSION", $"{gameVer}");
+
+        var textObj = versionText.gameObject;
         bool onMenu = __instance.menuButtons.activeSelf;
 
-        // Create the new game version text if not made already.
-        if (versionText == null) TryReplaceVersionText();
-        else {
-            // Make sure the text is correct.
-            versionText.text = Cfg.VERSION_TEXT.Value.Replace("$VERSION", $"{gameVer}");
-
-            var textObj = versionText.gameObject;
-            if (!textObj.activeSelf && onMenu) {
-                textObj.SetActive(true);
-            }
+        if (!textObj.activeSelf && onMenu) {
+            textObj.SetActive(true);
         }
     }
 
