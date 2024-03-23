@@ -4,7 +4,9 @@ using IntroTweaks.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -102,6 +104,24 @@ internal class MenuManagerPatch {
             }
             #endregion
 
+            #region Replace header with custom one, if enabled.
+            if (Cfg.USE_CUSTOM_HEADER.Value) {
+                string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string fullPath = Path.Combine(dir, "header.png");
+
+                Texture2D customImg = TextureFromPath(fullPath);
+                if (customImg != null) {
+                    Plugin.Logger.LogDebug("Custom header found! Attempting to replace the original..");
+
+                    Transform mainMenuHeader = Instance.menuButtons.transform.Find("HeaderImage");
+                    ReplaceHeader(mainMenuHeader, customImg);
+
+                    Transform loadingScreenHeader = MenuContainer.Find("LoadingScreen").Find("Image");
+                    ReplaceHeader(loadingScreenHeader, customImg);
+                }
+            }
+            #endregion
+
             TweakCanvasSettings(Instance.menuButtons, fixCanvas);
         }
         catch (Exception e) {
@@ -154,6 +174,19 @@ internal class MenuManagerPatch {
     [HarmonyPatch("ClickHostButton")]
     static void DisableMenuOnHost() {
         MenuPanel?.gameObject.SetActive(false);
+    }
+
+    static void ReplaceHeader(Transform transform, Texture2D newImg) {
+        Image header = transform.GetComponent<Image>();
+        Rect rect = new(0, 0, newImg.width, newImg.height);
+
+        header.sprite = Sprite.Create(newImg, rect, header.sprite.pivot);
+        header.sprite.texture.filterMode = FilterMode.Point;
+
+        header.transform.localScale = new(4.91f, 4.9f, 4.9f);
+
+        var localPos = header.transform.localPosition;
+        header.transform.localPosition = new(localPos.x, localPos.y - 15, localPos.z);
     }
 
     static bool FixMoreCompany() {
@@ -315,5 +348,16 @@ internal class MenuManagerPatch {
         rect.EditOffsets(new(-20, -25), new(20, 25));
 
         panel.FixScale();
+    }
+
+    public static Texture2D TextureFromPath(string path) {
+        if (!File.Exists(path)) return null;
+
+        byte[] data = File.ReadAllBytes(path);
+
+        Texture2D tex = new(1, 1);
+        tex.LoadImage(data);
+
+        return tex;
     }
 }

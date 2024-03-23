@@ -20,7 +20,8 @@ public class Config {
     public ConfigEntry<bool> ALIGN_MENU_BUTTONS { get; private set; }
     public ConfigEntry<bool> FIX_MENU_CANVAS { get; private set; }
     public ConfigEntry<bool> FIX_MENU_PANELS { get; private set; }
-    public ConfigEntry<bool> FIX_MORE_COMPANY { get; internal set; }
+    public ConfigEntry<bool> FIX_MORE_COMPANY { get; private set; }
+    public ConfigEntry<bool> USE_CUSTOM_HEADER { get; private set; }
     //public bool IMPROVE_HOST_SCREEN { get; private set; }
 
     public ConfigEntry<bool> REMOVE_LAN_WARNING { get; private set; }
@@ -100,6 +101,11 @@ public class Config {
             "PRONE TO INCOMPATIBILITIES! TURN THIS OFF IF YOU ENCOUNTER BREAKING BUGS."
         );
 
+        USE_CUSTOM_HEADER = NewEntry(Category.MENU_TWEAKS, "bUseCustomHeader", false,
+            "Replaces the menu logo/header with a custom one.\n" + 
+            "For your image to be loaded, it must be next to the DLL and named header.png"
+        );
+
         //IMPROVE_HOST_SCREEN = NewEntry(Category.MENU_TWEAKS, "bImproveHostScreen", true,
         //    "Should improvements be made to the host screen?"
         //);
@@ -117,7 +123,7 @@ public class Config {
         );
 
         REMOVE_CREDITS_BUTTON = NewEntry(Category.MENU_TWEAKS, "bRemoveCreditsButton", true,
-            "Hides the 'Credits' button on the main menu. The other buttons are automatically adjusted."
+            "Hides the 'Credits' button on the main menu. All other buttons are adjusted automatically."
         );
         #endregion
 

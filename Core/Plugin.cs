@@ -24,7 +24,7 @@ public class Plugin : BaseUnityPlugin {
     const string NAME = MyPluginInfo.PLUGIN_NAME;
     const string VERSION = MyPluginInfo.PLUGIN_VERSION;
 
-    private Harmony patcher;
+    private Harmony Patcher;
 
     static bool menuLoaded = false;
 
@@ -54,8 +54,8 @@ public class Plugin : BaseUnityPlugin {
         SelectedMode = Config.AUTO_SELECT_MODE.Value.ToLower();
 
         try {
-            patcher = new(GUID);
-            patcher.PatchAll();
+            Patcher = new(GUID);
+            Patcher.PatchAll();
 
             Logger.LogInfo("Plugin loaded.");
         }

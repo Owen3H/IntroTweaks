@@ -48,6 +48,6 @@
   </ItemGroup>
   
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="echo &quot;.&quot; &gt; &quot;E:\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\$(TargetName).dll&quot; &amp;&amp; xcopy /q /y /i &quot;$(TargetPath)&quot; &quot;E:\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\$(TargetName).dll&quot;" />
+    <Exec Command="echo &quot;.&quot; &gt; &quot;E:\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\IntroTweaks\$(TargetName).dll&quot; &amp;&amp; xcopy /q /y /i &quot;$(TargetPath)&quot; &quot;E:\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\IntroTweaks\$(TargetName).dll&quot;" />
   </Target>
 </Project>
