@@ -116,7 +116,7 @@ internal class MenuManagerPatch {
                     Transform mainMenuHeader = Instance.menuButtons.transform.Find("HeaderImage");
                     ReplaceHeader(mainMenuHeader, customImg);
 
-                    Transform loadingScreenHeader = MenuContainer.Find("LoadingScreen").Find("Image");
+                    Transform loadingScreenHeader = MenuContainer.Find("LoadingScreen/Image");
                     ReplaceHeader(loadingScreenHeader, customImg);
                 }
             }

@@ -101,14 +101,19 @@ public class Config {
             "PRONE TO INCOMPATIBILITIES! TURN THIS OFF IF YOU ENCOUNTER BREAKING BUGS."
         );
 
+        //IMPROVE_HOST_SCREEN = NewEntry(Category.MENU_TWEAKS, "bImproveHostScreen", true,
+        //    "Should improvements be made to the host screen?"
+        //);
+
         USE_CUSTOM_HEADER = NewEntry(Category.MENU_TWEAKS, "bUseCustomHeader", false,
             "Replaces the menu logo/header with a custom one.\n" + 
             "For your image to be loaded, it must be next to the DLL and named header.png"
         );
 
-        //IMPROVE_HOST_SCREEN = NewEntry(Category.MENU_TWEAKS, "bImproveHostScreen", true,
-        //    "Should improvements be made to the host screen?"
-        //);
+        CUSTOM_HEADER_PATH = NewEntry(Category.MENU_TWEAKS, "sCustomHeaderPath", "/IntroTweaks/header.png",
+            "The path to the header file, relative to BepInEx/plugins." + 
+            "While the .png postfix is optional, the file itself must be a PNG."
+        );
 
         REMOVE_LAN_WARNING = NewEntry(Category.MENU_TWEAKS, "bRemoveLanWarning", true,
             "Hides the warning popup when hosting a LAN session."
