@@ -50,6 +50,10 @@ internal class MenuManagerPatch {
     }
 
     static void PatchMenu() {
+        if (Plugin.ModInstalled("Emblem")) {
+            Plugin.Logger.LogWarning("\nDetected conflicting mod: Emblem.\nErrors may occurr if similar menu tweaks are enabled in both configs.");
+        }
+
         Cfg.ALWAYS_SHORT_VERSION.SettingChanged += (object s, EventArgs e) =>
             SetVersion();
 
@@ -59,8 +63,8 @@ internal class MenuManagerPatch {
         Cfg.VERSION_TEXT_OFFSET.SettingChanged += (object s, EventArgs e) => 
             versionTextRect.RefreshPosition();
 
-        try {
-            if (Cfg.FIX_MENU_PANELS.Value) {
+        if (Cfg.FIX_MENU_PANELS.Value) {
+            try {
                 // Make the white space equal on both sides of the panel.
                 FixPanelAlignment(MenuPanel);
 
@@ -70,8 +74,13 @@ internal class MenuManagerPatch {
 
                 Plugin.Logger.LogDebug("Fixed menu panel alignment.");
             }
+            catch (Exception e) {
+                Plugin.Logger.LogWarning($"An error occurred fixing menu panels. If it still worked, you can safely ignore this.\n{e}");
+            }
+        }
 
-            #region Remove credits buttons and align others.
+        #region Remove credits buttons and align others.
+        try {
             IEnumerable<GameObject> buttons = MenuPanel
                 .GetComponentsInChildren<Button>(true)
                 .Select(b => b.gameObject);
@@ -83,11 +92,15 @@ internal class MenuManagerPatch {
             if (Cfg.REMOVE_CREDITS_BUTTON.Value) {
                 RemoveCreditsButton(buttons);
             }
-            #endregion
+        } catch(Exception e) {
+            Plugin.Logger.LogError($"An error occurred aligning menu buttons.\n{e}");
+        }
+        #endregion
 
-            #region Handle MoreCompany/AdvancedCompany.
-            bool fixCanvas = Cfg.FIX_MENU_CANVAS.Value;
+        bool fixCanvas = Cfg.FIX_MENU_CANVAS.Value;
 
+        #region Handle MoreCompany/AdvancedCompany.
+        try {
             bool acInstalled = Plugin.ModInstalled("AdvancedCompany");
             bool mcInstalled = Plugin.ModInstalled("MoreCompany");
 
@@ -102,30 +115,33 @@ internal class MenuManagerPatch {
                     Plugin.Logger.LogDebug("MoreCompany found" + debugStr);
                 }
             }
-            #endregion
-
-            #region Replace header with custom one, if enabled.
-            if (Cfg.USE_CUSTOM_HEADER.Value) {
-                string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                string fullPath = Path.Combine(dir, "header.png");
-
-                Texture2D customImg = TextureFromPath(fullPath);
-                if (customImg != null) {
-                    Plugin.Logger.LogDebug("Custom header found! Attempting to replace the original..");
-
-                    Transform mainMenuHeader = Instance.menuButtons.transform.Find("HeaderImage");
-                    ReplaceHeader(mainMenuHeader, customImg);
-
-                    Transform loadingScreenHeader = MenuContainer.Find("LoadingScreen/Image");
-                    ReplaceHeader(loadingScreenHeader, customImg);
-                }
-            }
-            #endregion
-
-            TweakCanvasSettings(Instance.menuButtons, fixCanvas);
+        } catch(Exception e) {
+            Plugin.Logger.LogDebug($"An error occurred handling MoreCompany/AdvancedCompany.\n{e}");
         }
-        catch (Exception e) {
-            Plugin.Logger.LogError($"An error occurred patching the menu. SAJ.\n{e}");
+        #endregion
+
+        #region Replace header with custom one, if enabled.
+        if (Cfg.USE_CUSTOM_HEADER.Value) {
+            string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string fullPath = Path.Combine(dir, "header.png");
+
+            Texture2D customImg = TextureFromPath(fullPath);
+            if (customImg != null) {
+                Plugin.Logger.LogDebug("Custom header found! Attempting to replace the original..");
+
+                Transform mainMenuHeader = Instance.menuButtons.transform.Find("HeaderImage");
+                ReplaceHeader(mainMenuHeader, customImg);
+
+                Transform loadingScreenHeader = MenuContainer.Find("LoadingScreen/Image");
+                ReplaceHeader(loadingScreenHeader, customImg);
+            }
+        }
+        #endregion
+
+        try {
+            TweakCanvasSettings(Instance.menuButtons, fixCanvas);
+        } catch(Exception e) {
+            Plugin.Logger.LogError($"An error occurred tweaking canvas settings!\n{e}");
         }
 
         #region Hide UI elements

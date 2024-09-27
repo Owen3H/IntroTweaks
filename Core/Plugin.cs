@@ -26,7 +26,7 @@ public class Plugin : BaseUnityPlugin {
 
     static bool menuLoaded = false;
 
-    // May want to use 'Keys' for this in future.
+    // May want to use `.Keys` for this in future.
     public static bool ModInstalled(string name) {
         name = name.ToLower();
 

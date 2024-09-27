@@ -1,8 +1,12 @@
 # Changelog History
 This list is reads from bottom to top, with latest versions first.
 
-## v1.
-- 
+## v1.6.0
+- Added conflict warning/reminder when Emblem is detected.
+- Split the generic menu patching error into seperate ones for easier debugging.
+- Implemented ability to change the header/logo on the main menu to a custom one.
+  - `bUseCustomHeader` - Whether to enable this feature. Defaults to `false`.
+  - `sCustomHeaderPath` - The path to the header file, relative to `BepInEx/plugins`. (Must be PNG)
 
 ## v1.5.0
 - Added `fAutoStartGameDelay` for configuring the delay before the lever is automatically pulled.
