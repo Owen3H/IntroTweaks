@@ -1,15 +1,13 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BepInEx;
+using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using HarmonyLib;
-
-using static UnityEngine.Rendering.SplashScreen;
-using UnityEngine.SceneManagement;
-
-using BepInEx.Bootstrap;
-using System.Linq;
 using IntroTweaks.Data;
+using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.SplashScreen;
 
 namespace IntroTweaks;
 

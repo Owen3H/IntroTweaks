@@ -22,6 +22,7 @@ public class Config {
     public ConfigEntry<bool> FIX_MENU_PANELS { get; private set; }
     public ConfigEntry<bool> FIX_MORE_COMPANY { get; private set; }
     public ConfigEntry<bool> USE_CUSTOM_HEADER { get; private set; }
+    public ConfigEntry<string> CUSTOM_HEADER_PATH { get; private set; }
     //public bool IMPROVE_HOST_SCREEN { get; private set; }
 
     public ConfigEntry<bool> REMOVE_LAN_WARNING { get; private set; }
@@ -112,7 +113,7 @@ public class Config {
 
         CUSTOM_HEADER_PATH = NewEntry(Category.MENU_TWEAKS, "sCustomHeaderPath", "/IntroTweaks/header.png",
             "The path to the header file, relative to BepInEx/plugins." + 
-            "While the .png postfix is optional, the file itself must be a PNG."
+            "While the '.png' extension is optional, the actual file type must be PNG."
         );
 
         REMOVE_LAN_WARNING = NewEntry(Category.MENU_TWEAKS, "bRemoveLanWarning", true,
